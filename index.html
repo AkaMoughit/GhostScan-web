@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GhostScan</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar" style="padding: 10px;">
+        <img src="assets/logo.png" alt="Logo" style="height: 50px; width: auto; margin-right: 10px;" />
+        <div style="display: inline-block; color: #131D2F; font-size: 20px; font-family: Inter; font-weight: 500; margin-right: 20px;">Home</div>
+        <div style="display: inline-block; color: #131D2F; font-size: 20px; font-family: Inter; font-weight: 500; margin-right: 20px;">Our Goals</div>
+        <div style="display: inline-block; color: #131D2F; font-size: 20px; font-family: Inter; font-weight: 500; margin-right: 20px;">Get Started</div>
+        <div style="display: inline-block; color: #131D2F; font-size: 20px; font-family: Inter; font-weight: 500;">Login</div>
+    </nav>
+    <hr>
+    <br>
+    <br>
+    <table style="width: 100%;">
+        <tr>
+            <td>
+                <div id="image" style="background-size: cover; background-position: center; height: 400px; padding: 20px;">
+                    <div style="clear: left;">
+                        <span style="color: #455A64; font-size: 50px; font-family: Inter; font-weight: 600; line-height: 73.25px; word-wrap: break-word;">WELCOME TO THE </span>
+                        <span style="color: #69B7D0; font-size: 50px; font-family: Inter; font-weight: 600; line-height: 73.25px; word-wrap: break-word;">N1</span>
+                        <span style="color: #455A64; font-size: 50px; font-family: Inter; font-weight: 600; line-height: 73.25px; word-wrap: break-word;"> CIN SCANNER APP</span>
+                    </div>
+                    <div style="float: left; color: #69B7D0; font-size: 23px; font-family: Inter; font-weight: 500; line-height: 35px; word-wrap: break-word;">
+                        DONT WORRY WE DONT TAKE DATA 😉
+                    </div>
+                </div>
+            </td>
+            <td id="insert">
+                <div>
+                    <form id="uploadForm">
+                        <div id="insert_image" style="background-color: #131D2F; color: #69B7D0; font-size: 23px; font-family: Inter; font-weight: 500; line-height: 50px; word-wrap: break-word; clear: right; height: 150px; padding: 50px;">
+                            <label for="fileInput" style="cursor: pointer;">
+                                <img id="uploadedImage" src="assets/insert_image.png" alt="Insert Image" style="height: 75px; margin-left: 10px;">
+                                <input type="file" id="fileInput" name="fileInput" accept="image/*" onchange="displayImage()">
+                            </label>
+                            <span id="selectedFileName"></span>
+                            <br>
+                            <button type="button" onclick="uploadImage()">Upload</button>
+                            <!-- Add a link or button to redirect to form.html -->
+                            <a href="form.html" style="color: #69B7D0;">View Response</a>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        // Function to get URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Retrieve the response parameter from the URL
+        var responseData = getParameterByName('response');
+
+        // Display the response data
+        if (responseData) {
+            document.getElementById('responseDisplay').innerHTML = 'Response: ' + responseData;
+        }
+
+        // Function to display the uploaded image
+        function displayImage() {
+            var input = document.getElementById('fileInput');
+            var uploadedImage = document.getElementById('uploadedImage');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

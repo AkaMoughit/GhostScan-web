@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Response</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div>
+        <h2>Response from GhostScan</h2>
+        <div id="responseDisplay"></div>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Retrieve the response parameter from the URL
+        var responseData = getParameterByName('response');
+
+        // Display the response data
+        if (responseData) {
+            // Parse the JSON response
+            var responseObj = JSON.parse(responseData);
+
+            // Create a string with relevant information
+            var responseString = 'Filename: ' + responseObj.filename + '<br>' +
+                                'Size: ' + responseObj.size + ' bytes<br>' +
+                                'Content Type: ' + responseObj['content type'];
+
+            // Display the response information
+            document.getElementById('responseDisplay').innerHTML = responseString;
+        }
+    </script>
+</body>
+</html>
